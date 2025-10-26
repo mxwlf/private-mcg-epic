@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "dgSpecHash": "I3YwIbsOTUA=",
+  "success": true,
+  "projectFilePath": "/Users/epadillavega/code/neo/epic/src/infra/epicclient/epicclient.csproj",
+  "expectedPackageFiles": [
+    "/Users/epadillavega/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
+    "/Users/epadillavega/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.0/microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+    "/Users/epadillavega/.nuget/packages/microsoft.identitymodel.abstractions/8.4.0/microsoft.identitymodel.abstractions.8.4.0.nupkg.sha512",
+    "/Users/epadillavega/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.4.0/microsoft.identitymodel.jsonwebtokens.8.4.0.nupkg.sha512",
+    "/Users/epadillavega/.nuget/packages/microsoft.identitymodel.logging/8.4.0/microsoft.identitymodel.logging.8.4.0.nupkg.sha512",
+    "/Users/epadillavega/.nuget/packages/microsoft.identitymodel.tokens/8.4.0/microsoft.identitymodel.tokens.8.4.0.nupkg.sha512",
+    "/Users/epadillavega/.nuget/packages/system.identitymodel.tokens.jwt/8.4.0/system.identitymodel.tokens.jwt.8.4.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "message": "mcg.edge.fhir.epic.oauthclient depends on Microsoft.IdentityModel.JsonWebTokens (>= 8.3.2) but Microsoft.IdentityModel.JsonWebTokens 8.3.2 was not found. Microsoft.IdentityModel.JsonWebTokens 8.4.0 was resolved instead.",
+      "projectPath": "/Users/epadillavega/code/neo/epic/src/infra/epicclient/epicclient.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/epadillavega/code/neo/epic/src/infra/epicclient/epicclient.csproj",
+      "libraryId": "Microsoft.IdentityModel.JsonWebTokens",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    },
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "message": "mcg.edge.fhir.epic.oauthclient depends on Microsoft.IdentityModel.Tokens (>= 8.3.2) but Microsoft.IdentityModel.Tokens 8.3.2 was not found. Microsoft.IdentityModel.Tokens 8.4.0 was resolved instead.",
+      "projectPath": "/Users/epadillavega/code/neo/epic/src/infra/epicclient/epicclient.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/epadillavega/code/neo/epic/src/infra/epicclient/epicclient.csproj",
+      "libraryId": "Microsoft.IdentityModel.Tokens",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    },
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "message": "mcg.edge.fhir.epic.oauthclient depends on System.IdentityModel.Tokens.Jwt (>= 8.3.2) but System.IdentityModel.Tokens.Jwt 8.3.2 was not found. System.IdentityModel.Tokens.Jwt 8.4.0 was resolved instead.",
+      "projectPath": "/Users/epadillavega/code/neo/epic/src/infra/epicclient/epicclient.csproj",
+      "warningLevel": 1,
+      "filePath": "/Users/epadillavega/code/neo/epic/src/infra/epicclient/epicclient.csproj",
+      "libraryId": "System.IdentityModel.Tokens.Jwt",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
+}

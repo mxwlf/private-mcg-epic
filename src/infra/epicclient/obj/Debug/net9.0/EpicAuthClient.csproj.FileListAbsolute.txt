@@ -1,0 +1,12 @@
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/EpicAuthClient.csproj.AssemblyReference.cache
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/EpicAuthClient.GeneratedMSBuildEditorConfig.editorconfig
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/EpicAuthClient.AssemblyInfoInputs.cache
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/EpicAuthClient.AssemblyInfo.cs
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/EpicAuthClient.csproj.CoreCompileInputs.cache
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/bin/Debug/net9.0/mcg.edge.fhir.epic.oauthclient.deps.json
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/bin/Debug/net9.0/mcg.edge.fhir.epic.oauthclient.dll
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/bin/Debug/net9.0/mcg.edge.fhir.epic.oauthclient.pdb
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/mcg.edge.fhir.epic.oauthclient.dll
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/refint/mcg.edge.fhir.epic.oauthclient.dll
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/mcg.edge.fhir.epic.oauthclient.pdb
+/Users/epadillavega/code/neo/epic/src/infra/epicauthclient/EpicAuthClient/obj/Debug/net9.0/ref/mcg.edge.fhir.epic.oauthclient.dll
