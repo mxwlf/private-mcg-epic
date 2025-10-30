@@ -3,6 +3,12 @@
     <Project Path="src\core\epic.abstractions\epic.abstractions.csproj" Type="Classic C#" />
     <Project Path="src\infra\epic.httpclients\epic.httpclients.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/test/">
+    <File Path="test\Directory.Build.props" />
+  </Folder>
+  <Folder Name="/test/int/">
+    <Project Path="test\int\epic.httpclients.test.int\epic.httpclients.test.int.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/zln files/">
     <File Path="README.md" />
     <File Path="Directory.Packages.props" />

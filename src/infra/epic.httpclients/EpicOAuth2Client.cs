@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text.Json;
 using Mcg.Edge.Fhir.Epic.Abstractions;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Mcg.Edge.Fhir.Epic.HttpClients;
@@ -12,29 +13,29 @@ namespace Mcg.Edge.Fhir.Epic.HttpClients;
 /// </summary>
 public class EpicOAuth2Client : IDisposable
 {
-    private readonly EpicAuthClientOptions _options;
+    private readonly IOptionsMonitor<EpicAuthClientOptions> _optionsMonitor;
     private readonly HttpClient _httpClient;
     private readonly bool _ownsHttpClient;
     private bool _disposed;
 
     /// <summary>
-    /// Initializes a new instance of the EpicOAuth2Client with the specified options.
+    /// Initializes a new instance of the EpicOAuth2Client with the specified options monitor.
     /// Creates its own HttpClient instance.
     /// </summary>
-    /// <param name="options">The configuration options.</param>
-    public EpicOAuth2Client(EpicAuthClientOptions options)
-        : this(options, null)
+    /// <param name="optionsMonitor">The configuration options monitor.</param>
+    public EpicOAuth2Client(IOptionsMonitor<EpicAuthClientOptions> optionsMonitor)
+        : this(optionsMonitor, null)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the EpicOAuth2Client with the specified options and HttpClient.
+    /// Initializes a new instance of the EpicOAuth2Client with the specified options monitor and HttpClient.
     /// </summary>
-    /// <param name="options">The configuration options.</param>
+    /// <param name="optionsMonitor">The configuration options monitor.</param>
     /// <param name="httpClient">The HttpClient to use for requests. If null, a new instance will be created.</param>
-    public EpicOAuth2Client(EpicAuthClientOptions options, HttpClient? httpClient)
+    public EpicOAuth2Client(IOptionsMonitor<EpicAuthClientOptions> optionsMonitor, HttpClient? httpClient)
     {
-        this._options = options ?? throw new ArgumentNullException(nameof(options));
+        this._optionsMonitor = optionsMonitor ?? throw new ArgumentNullException(nameof(optionsMonitor));
 
         if (httpClient == null)
         {
@@ -76,7 +77,7 @@ public class EpicOAuth2Client : IDisposable
         };
 
         // Send the request
-        var response = await this._httpClient.PostAsync(this._options.TokenEndpoint, requestContent, cancellationToken);
+        var response = await this._httpClient.PostAsync(this._optionsMonitor.CurrentValue.TokenEndpoint, requestContent, cancellationToken);
 
         // Read response content
         var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
@@ -105,11 +106,12 @@ public class EpicOAuth2Client : IDisposable
     /// <returns>The signed JWT string.</returns>
     private string GenerateJwt()
     {
+        var options = this._optionsMonitor.CurrentValue;
         var now = DateTimeOffset.UtcNow;
-        var exp = now.AddSeconds(this._options.JwtExpirationSeconds);
+        var exp = now.AddSeconds(options.JwtExpirationSeconds);
 
         // Load the private key
-        var rsa = LoadRsaPrivateKey(this._options.PrivateKeyPem);
+        var rsa = LoadRsaPrivateKey(options.PrivateKey);
         var signingCredentials = new SigningCredentials(
             new RsaSecurityKey(rsa),
             SecurityAlgorithms.RsaSha384
@@ -119,14 +121,14 @@ public class EpicOAuth2Client : IDisposable
         // Set time properties directly on descriptor for proper numeric formatting
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Issuer = this._options.ClientId,
-            Audience = this._options.TokenEndpoint,
+            Issuer = options.ClientId,
+            Audience = options.TokenEndpoint,
             IssuedAt = now.UtcDateTime,
             NotBefore = now.UtcDateTime,
             Expires = exp.UtcDateTime,
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, this._options.ClientId),
+                new Claim(JwtRegisteredClaimNames.Sub, options.ClientId),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             }),
             SigningCredentials = signingCredentials
@@ -146,7 +148,6 @@ public class EpicOAuth2Client : IDisposable
     {
         var rsa = RSA.Create();
 
-        // Remove PEM header/footer and whitespace
         var keyText = privateKeyPem
             .Replace("\r", "")
             .Replace("\n", "")
