@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src\core\epic.abstractions\epic.abstractions.csproj" Type="Classic C#" />
+    <Project Path="src\infra\epic.httpclients\epic.httpclients.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/zln files/">
+    <File Path="README.md" />
+    <File Path="Directory.Packages.props" />
+    <File Path="CLAUDE.md" />
+    <File Path="AGENTS.md" />
+    <File Path="version.json" />
+    <File Path=".specify\memory\constitution.md" />
+  </Folder>
+</Solution>

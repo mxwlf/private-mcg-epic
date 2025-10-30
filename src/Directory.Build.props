@@ -1,0 +1,54 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+    <Authors>Edge Team</Authors>
+    <Company>MCG Health LLC</Company>
+    <Copyright>Copyright 2025 - MCG Health LLC</Copyright>
+    <UserSecretsId>66387414-3f3f-46c4-89fe-a868cb016e26</UserSecretsId>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AnalysisMode>All</AnalysisMode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <!-- Categories -->
+    <AnalysisLevelDesign>latest-all</AnalysisLevelDesign>
+    <AnalysisLevelDocumentation>latest-all</AnalysisLevelDocumentation>
+    <AnalysisLevelGlobalization>latest-all</AnalysisLevelGlobalization>
+    <AnalysisLevelInteroperability>latest-all</AnalysisLevelInteroperability>
+    <AnalysisLevelMaintainability>latest-all</AnalysisLevelMaintainability>
+    <AnalysisLevelNaming>latest-all</AnalysisLevelNaming>
+    <AnalysisLevelPerformance>latest-all</AnalysisLevelPerformance>
+    <AnalysisLevelSingleFile>latest-all</AnalysisLevelSingleFile>
+    <AnalysisLevelSecurity>latest-all</AnalysisLevelSecurity>
+    <AnalysisLevelStyle>latest-all</AnalysisLevelStyle>
+    <AnalysisLevelUsage>latest-all</AnalysisLevelUsage>
+    <AnalysisLevelReliability>latest-all</AnalysisLevelReliability>
+    <!--<WarningsAsErrors Condition="'$(Configuration)' == 'Release'">NU1605;CS8600;CS8602;CS8603</WarningsAsErrors>-->
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- Recommendation from Nerdbank to reduce GetBuildVersion invocations :https://dotnet.github.io/Nerdbank.GitVersioning/docs/build-systems/msbuild.html#reducing-getbuildversion-invocations -->
+    <GitVersionBaseDirectory>$(MSBuildThisFileDirectory)</GitVersionBaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <!-- Make internals visible to test projects -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>$(AssemblyName).test.unit</_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>$(AssemblyName).test.int</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Condition="!Exists('packages.config')">
+    </PackageReference>
+  </ItemGroup>
+</Project>

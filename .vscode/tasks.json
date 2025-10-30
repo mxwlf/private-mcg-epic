@@ -1,0 +1,36 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "dotnet",
+			"task": "build",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "dotnet: build"
+		},
+		{
+            "label": "run aspirehost https",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--launch-profile",
+                "https"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/src/hosts/aspirehost"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile",
+            "detail": "Run the Aspire host with HTTPS launch profile"
+        }
+	]
+}

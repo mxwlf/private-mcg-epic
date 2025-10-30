@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+   <AssemblyName>mcg.edge.fhir.epic.httpclients</AssemblyName>
+    <RootNamespace>Mcg.Edge.Fhir.Epic.HttpClients</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\epic.abstractions\epic.abstractions.csproj" />
+  </ItemGroup>
+</Project>

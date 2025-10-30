@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>mcg.edge.fhir.epic.abstractions</AssemblyName>
+    <RootNamespace>Mcg.Edge.Fhir.Epic.Abstractions</RootNamespace>
+  </PropertyGroup>
+</Project>
