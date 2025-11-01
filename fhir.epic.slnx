@@ -9,6 +9,7 @@
   <Folder Name="/test/int/">
     <Project Path="test\int\epic.httpclients.test.int\epic.httpclients.test.int.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/test/unit/" />
   <Folder Name="/zln files/">
     <File Path="README.md" />
     <File Path="Directory.Packages.props" />

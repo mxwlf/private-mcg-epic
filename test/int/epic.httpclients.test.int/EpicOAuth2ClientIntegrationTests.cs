@@ -14,13 +14,14 @@ namespace Mcg.Edge.Fhir.Epic.HttpClients.Test.Integration;
 /// dotnet user-secrets set "epic:auth:privatekey" "YOUR_PRIVATE_KEY_HERE" --project /path/to/epic.httpclients.test.int.csproj
 /// </summary>
 [Trait("Category", "Integration")]
-[Trait("WrittenBy", "Agent")]
-[Trait("Agent", "Anthropic-Claude-Sonnet-4.5")]
-public class EpicOAuth2ClientIntegrationTests : IDisposable
+public sealed class EpicOAuth2ClientIntegrationTests : IDisposable
 {
     private readonly ServiceProvider _serviceProvider;
     private readonly IConfiguration _configuration;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EpicOAuth2ClientIntegrationTests"/> class.
+    /// </summary>
     public EpicOAuth2ClientIntegrationTests()
     {
         // Build configuration from multiple sources:
@@ -46,8 +47,11 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
         _serviceProvider = services.BuildServiceProvider();
     }
 
+    /// <summary>
+    /// Tests that configuration loads correctly from appsettings.json.
+    /// </summary>
     [Fact]
-    public void Configuration_ShouldLoadFromAppSettings()
+    public void ConfigurationShouldLoadFromAppSettings()
     {
         // Arrange & Act
         var clientId = _configuration["epic:auth:clientid"];
@@ -59,8 +63,11 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
         tokenEndpoint.Should().StartWith("https://", "TokenEndpoint should be a valid HTTPS URL");
     }
 
+    /// <summary>
+    /// Tests that the private key loads correctly from user secrets.
+    /// </summary>
     [Fact]
-    public void Configuration_ShouldLoadPrivateKeyFromUserSecrets()
+    public void ConfigurationShouldLoadPrivateKeyFromUserSecrets()
     {
         // Arrange & Act
         var privateKey = _configuration["epic:auth:privatekey"];
@@ -71,8 +78,11 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
             "Run: dotnet user-secrets set \"epic:auth:privatekey\" \"YOUR_KEY\" --project /path/to/epic.httpclients.test.int.csproj");
     }
 
+    /// <summary>
+    /// Tests that the service provider can resolve the EpicOAuth2Client.
+    /// </summary>
     [Fact]
-    public void ServiceProvider_ShouldResolveEpicOAuth2Client()
+    public void ServiceProviderShouldResolveEpicOAuth2Client()
     {
         // Act
         var client = _serviceProvider.GetService<EpicOAuth2Client>();
@@ -81,8 +91,12 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
         client.Should().NotBeNull("EpicOAuth2Client should be registered in the DI container");
     }
 
+    /// <summary>
+    /// Tests that requesting a token with valid configuration returns an access token.
+    /// </summary>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     [Fact]
-    public async Task RequestTokenAsync_WithValidConfiguration_ShouldReturnToken()
+    public async Task RequestTokenAsyncWithValidConfigurationShouldReturnToken()
     {
         // Arrange
         var client = _serviceProvider.GetRequiredService<EpicOAuth2Client>();
@@ -105,8 +119,12 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
         result.TokenType.Should().Be("Bearer", "Token type should be Bearer");
     }
 
+    /// <summary>
+    /// Tests that the client can request tokens multiple times successfully.
+    /// </summary>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     [Fact]
-    public async Task RequestTokenAsync_WithValidConfiguration_TokenShouldBeReusable()
+    public async Task RequestTokenAsyncWithValidConfigurationTokenShouldBeReusable()
     {
         // Arrange
         var client = _serviceProvider.GetRequiredService<EpicOAuth2Client>();
@@ -135,12 +153,15 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
         result2.ExpiresIn.Should().BeGreaterThan(0);
     }
 
+    /// <summary>
+    /// Tests that token requests can be cancelled using a cancellation token.
+    /// </summary>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     [Fact]
-    public async Task RequestTokenAsync_WithCancellationToken_ShouldBeCancellable()
+    public async Task RequestTokenAsyncWithCancellationTokenShouldBeCancellable()
     {
         // Arrange
         var client = _serviceProvider.GetRequiredService<EpicOAuth2Client>();
-        var cts = new CancellationTokenSource();
 
         // Skip test if private key is not configured
         var privateKey = _configuration["epic:auth:privatekey"];
@@ -150,7 +171,8 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
         }
 
         // Act & Assert
-        cts.Cancel(); // Cancel immediately
+        using var cts = new CancellationTokenSource();
+        await cts.CancelAsync(); // Cancel immediately
 
         var act = async () => await client.RequestTokenAsync(cts.Token);
 
@@ -159,8 +181,11 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
             "The operation should be cancellable");
     }
 
+    /// <summary>
+    /// Tests that the EpicOAuth2Client can be disposed without throwing exceptions.
+    /// </summary>
     [Fact]
-    public void EpicOAuth2Client_ShouldBeDisposable()
+    public void EpicOAuth2ClientShouldBeDisposable()
     {
         // Arrange
         var client = _serviceProvider.GetRequiredService<EpicOAuth2Client>();
@@ -172,8 +197,12 @@ public class EpicOAuth2ClientIntegrationTests : IDisposable
         act.Should().NotThrow("EpicOAuth2Client should implement IDisposable correctly");
     }
 
+    /// <summary>
+    /// Disposes the service provider.
+    /// </summary>
     public void Dispose()
     {
         _serviceProvider?.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
