@@ -14,8 +14,6 @@ namespace Mcg.Edge.Fhir.Epic.HttpClients.Test.Integration;
 /// dotnet user-secrets set "epic:auth:privatekey" "YOUR_PRIVATE_KEY_HERE" --project /path/to/epic.httpclients.test.int.csproj
 /// </summary>
 [Trait("Category", "Integration")]
-[Trait("WrittenBy", "Agent")]
-[Trait("Agent", "Anthropic-Claude-Sonnet-4.5")]
 public class EpicOAuth2ClientIntegrationTests : IDisposable
 {
     private readonly ServiceProvider _serviceProvider;
