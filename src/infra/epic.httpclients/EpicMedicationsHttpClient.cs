@@ -55,7 +55,7 @@ public class EpicMedicationsHttpClient : IEpicCurrentMedicationsClient
             "Calling Epic GetCurrentMedications API for patient {PatientId}",
             body.PatientId);
 
-        return await PostJsonAsync(url, body, accessToken, cancellationToken);
+        return await PostJsonAsync(url, body, accessToken, cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>
@@ -78,7 +78,7 @@ public class EpicMedicationsHttpClient : IEpicCurrentMedicationsClient
             body.ContactId,
             body.OrderIds?.Count ?? 0);
 
-        return await PostJsonAsync(url, body, accessToken, cancellationToken);
+        return await PostJsonAsync(url, body, accessToken, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -122,10 +122,10 @@ public class EpicMedicationsHttpClient : IEpicCurrentMedicationsClient
         // Send the request
         this._logger.LogDebug("Sending POST request to {Url}", url);
 
-        var response = await this._httpClient.SendAsync(request, cancellationToken);
+        var response = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
         // Read the response content
-        var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
+        var responseContent = await response.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
 
         // Check for errors
         if (!response.IsSuccessStatusCode)
