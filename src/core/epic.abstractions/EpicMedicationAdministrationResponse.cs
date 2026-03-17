@@ -4,7 +4,6 @@
 
 namespace Mcg.Edge.Fhir.Epic.Abstractions;
 
-public class MedicationAdministrationRequest
+public class EpicMedicationAdministrationResponse
 {
-
 }

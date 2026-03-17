@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace Mcg.Edge.Fhir.Epic.Abstractions;
 
-public class TokenResponse
+public class TokenResponse // TODO: grab a formal type
 {
     [JsonPropertyName("access_token")] public string AccessToken { get; set; }
 

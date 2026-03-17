@@ -4,7 +4,7 @@
 
 namespace Mcg.Edge.Fhir.Epic.Abstractions;
 
-public class CurrentMedicationsRequest
+public class MedicationOrder
 {
 
 }

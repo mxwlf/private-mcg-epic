@@ -3,4 +3,11 @@
     <AssemblyName>mcg.edge.fhir.epic.abstractions</AssemblyName>
     <RootNamespace>Mcg.Edge.Fhir.Epic.Abstractions</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Hl7.Fhir.Base" />
+    <PackageReference Update="Nerdbank.GitVersioning">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>
